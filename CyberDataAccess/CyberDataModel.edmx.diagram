@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fc0b17a01e364c9fb1fc3e53dedb6c3e" Name="Diagram1" ZoomLevel="95" ShowGrid="false">
+        <EntityTypeShape EntityType="cyberdbModel.Тренер" Width="1.5" PointX="7.75" PointY="7.125" />
+        <EntityTypeShape EntityType="cyberdbModel.Гра" Width="1.5" PointX="1" PointY="6" />
+        <EntityTypeShape EntityType="cyberdbModel.Організація" Width="1.875" PointX="2.5" PointY="3.875" />
+        <EntityTypeShape EntityType="cyberdbModel.Гравець" Width="1.5" PointX="2.75" PointY="7.625" />
+        <EntityTypeShape EntityType="cyberdbModel.Команда" Width="1.5" PointX="4.875" PointY="7.625" />
+        <EntityTypeShape EntityType="cyberdbModel.Команда_Турнір" Width="1.875" PointX="7.25" PointY="5.125" />
+        <EntityTypeShape EntityType="cyberdbModel.Турнір" Width="1.75" PointX="4.875" PointY="3.875" />
+        <EntityTypeShape EntityType="cyberdbModel.Coach" Width="1.5" PointX="5.25" PointY="15.125" />
+        <EntityTypeShape EntityType="cyberdbModel.Game" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="cyberdbModel.Health" Width="1.5" PointX="7.5" PointY="11.75" />
+        <EntityTypeShape EntityType="cyberdbModel.Organizer" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="cyberdbModel.Player" Width="1.5" PointX="5.25" PointY="11.375" />
+        <EntityTypeShape EntityType="cyberdbModel.Team" Width="1.5" PointX="3" PointY="10.625" />
+        <EntityTypeShape EntityType="cyberdbModel.Team_Tournament" Width="1.5" PointX="5.25" PointY="7.875" />
+        <EntityTypeShape EntityType="cyberdbModel.Tournament" Width="1.5" PointX="3" PointY="6.5" />
+        <AssociationConnector Association="cyberdbModel.FK__Coach__team_id__2B0A656D" />
+        <AssociationConnector Association="cyberdbModel.FK__Team__game_id__1AD3FDA4" />
+        <AssociationConnector Association="cyberdbModel.FK__Tournamen__game___17036CC0" />
+        <AssociationConnector Association="cyberdbModel.FK__Health__player_i__4F47C5E3" />
+        <AssociationConnector Association="cyberdbModel.FK__Tournamen__organ__17F790F9" />
+        <AssociationConnector Association="cyberdbModel.FK__Player__team_id__2DE6D218" />
+        <AssociationConnector Association="cyberdbModel.FK__Team_Tour__team___1DB06A4F" />
+        <AssociationConnector Association="cyberdbModel.FK__Team_Tour__tourn__1EA48E88" />
+        <EntityTypeShape EntityType="cyberdbModel.Stats" Width="1.5" PointX="9.75" PointY="11.875" />
+        <AssociationConnector Association="cyberdbModel.FK__Stats__health_id__5224328E" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

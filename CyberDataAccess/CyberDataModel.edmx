@@ -1,0 +1,666 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="cyberdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Coach">
+          <Key>
+            <PropertyRef Name="coach_id" />
+          </Key>
+          <Property Name="coach_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="coach_lastname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="coach_firstname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="coach_birthdate" Type="varchar" MaxLength="255" />
+          <Property Name="coach_country" Type="varchar" MaxLength="255" />
+          <Property Name="coach_login" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="coach_password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="team_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="game_id" />
+          </Key>
+          <Property Name="game_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="game_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="game_year" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Health">
+          <Key>
+            <PropertyRef Name="health_id" />
+          </Key>
+          <Property Name="health_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="health_temperature" Type="float" />
+          <Property Name="health_pulse" Type="float" />
+          <Property Name="health_systolicPressure" Type="int" />
+          <Property Name="health_diastolicPressure" Type="int" />
+          <Property Name="player_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Organizer">
+          <Key>
+            <PropertyRef Name="organizer_id" />
+          </Key>
+          <Property Name="organizer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="organizer_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="organizer_description" Type="varchar" MaxLength="255" />
+          <Property Name="organizer_login" Type="varchar" MaxLength="255" />
+          <Property Name="organizer_password" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="player_id" />
+          </Key>
+          <Property Name="player_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="player_lastname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="player_firstname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="player_birthdate" Type="varchar" MaxLength="255" />
+          <Property Name="player_country" Type="varchar" MaxLength="255" />
+          <Property Name="player_login" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="player_password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="team_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Stats">
+          <Key>
+            <PropertyRef Name="stats_id" />
+          </Key>
+          <Property Name="stats_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stats_median" Type="float" />
+          <Property Name="stats_mode" Type="int" />
+          <Property Name="stats_mean" Type="float" />
+          <Property Name="stats_stdev" Type="float" />
+          <Property Name="health_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="team_id" />
+          </Key>
+          <Property Name="team_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="team_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="team_country" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="game_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Team_Tournament">
+          <Key>
+            <PropertyRef Name="team_tournament_id" />
+          </Key>
+          <Property Name="team_tournament_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="team_id" Type="int" />
+          <Property Name="tournament_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Tournament">
+          <Key>
+            <PropertyRef Name="tournament_id" />
+          </Key>
+          <Property Name="tournament_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tournament_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="tournament_type" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="tournament_startdate" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="tournament_enddate" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="tournament_location" Type="varchar" MaxLength="255" />
+          <Property Name="game_id" Type="int" />
+          <Property Name="organizer_id" Type="int" />
+        </EntityType>
+        <Association Name="FK__Coach__team_id__2B0A656D">
+          <End Role="Team" Type="Self.Team" Multiplicity="0..1" />
+          <End Role="Coach" Type="Self.Coach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="team_id" />
+            </Principal>
+            <Dependent Role="Coach">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Health__player_i__4F47C5E3">
+          <End Role="Player" Type="Self.Player" Multiplicity="0..1" />
+          <End Role="Health" Type="Self.Health" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="Health">
+              <PropertyRef Name="player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Player__team_id__2DE6D218">
+          <End Role="Team" Type="Self.Team" Multiplicity="0..1" />
+          <End Role="Player" Type="Self.Player" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="team_id" />
+            </Principal>
+            <Dependent Role="Player">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Stats__health_id__5224328E">
+          <End Role="Health" Type="Self.Health" Multiplicity="0..1" />
+          <End Role="Stats" Type="Self.Stats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Health">
+              <PropertyRef Name="health_id" />
+            </Principal>
+            <Dependent Role="Stats">
+              <PropertyRef Name="health_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Team__game_id__1AD3FDA4">
+          <End Role="Game" Type="Self.Game" Multiplicity="0..1" />
+          <End Role="Team" Type="Self.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="game_id" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Team_Tour__team___1DB06A4F">
+          <End Role="Team" Type="Self.Team" Multiplicity="0..1" />
+          <End Role="Team_Tournament" Type="Self.Team_Tournament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="team_id" />
+            </Principal>
+            <Dependent Role="Team_Tournament">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Team_Tour__tourn__1EA48E88">
+          <End Role="Tournament" Type="Self.Tournament" Multiplicity="0..1" />
+          <End Role="Team_Tournament" Type="Self.Team_Tournament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tournament">
+              <PropertyRef Name="tournament_id" />
+            </Principal>
+            <Dependent Role="Team_Tournament">
+              <PropertyRef Name="tournament_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tournamen__game___17036CC0">
+          <End Role="Game" Type="Self.Game" Multiplicity="0..1" />
+          <End Role="Tournament" Type="Self.Tournament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="game_id" />
+            </Principal>
+            <Dependent Role="Tournament">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tournamen__organ__17F790F9">
+          <End Role="Organizer" Type="Self.Organizer" Multiplicity="0..1" />
+          <End Role="Tournament" Type="Self.Tournament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizer">
+              <PropertyRef Name="organizer_id" />
+            </Principal>
+            <Dependent Role="Tournament">
+              <PropertyRef Name="organizer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="cyberdbModelStoreContainer">
+          <EntitySet Name="Coach" EntityType="Self.Coach" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Game" EntityType="Self.Game" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Health" EntityType="Self.Health" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Organizer" EntityType="Self.Organizer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stats" EntityType="Self.Stats" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Team_Tournament" EntityType="Self.Team_Tournament" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tournament" EntityType="Self.Tournament" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Coach__team_id__2B0A656D" Association="Self.FK__Coach__team_id__2B0A656D">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Coach" EntitySet="Coach" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Health__player_i__4F47C5E3" Association="Self.FK__Health__player_i__4F47C5E3">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="Health" EntitySet="Health" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Player__team_id__2DE6D218" Association="Self.FK__Player__team_id__2DE6D218">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Player" EntitySet="Player" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Stats__health_id__5224328E" Association="Self.FK__Stats__health_id__5224328E">
+            <End Role="Health" EntitySet="Health" />
+            <End Role="Stats" EntitySet="Stats" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Team__game_id__1AD3FDA4" Association="Self.FK__Team__game_id__1AD3FDA4">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="Team" EntitySet="Team" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Team_Tour__team___1DB06A4F" Association="Self.FK__Team_Tour__team___1DB06A4F">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Team_Tournament" EntitySet="Team_Tournament" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Team_Tour__tourn__1EA48E88" Association="Self.FK__Team_Tour__tourn__1EA48E88">
+            <End Role="Tournament" EntitySet="Tournament" />
+            <End Role="Team_Tournament" EntitySet="Team_Tournament" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tournamen__game___17036CC0" Association="Self.FK__Tournamen__game___17036CC0">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="Tournament" EntitySet="Tournament" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tournamen__organ__17F790F9" Association="Self.FK__Tournamen__organ__17F790F9">
+            <End Role="Organizer" EntitySet="Organizer" />
+            <End Role="Tournament" EntitySet="Tournament" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cyberdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="cyberdbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Coach" EntityType="cyberdbModel.Coach" />
+          <EntitySet Name="Game" EntityType="cyberdbModel.Game" />
+          <EntitySet Name="Health" EntityType="cyberdbModel.Health" />
+          <EntitySet Name="Organizer" EntityType="cyberdbModel.Organizer" />
+          <EntitySet Name="Player" EntityType="cyberdbModel.Player" />
+          <EntitySet Name="Team" EntityType="cyberdbModel.Team" />
+          <EntitySet Name="Team_Tournament" EntityType="cyberdbModel.Team_Tournament" />
+          <EntitySet Name="Tournament" EntityType="cyberdbModel.Tournament" />
+          <AssociationSet Name="FK__Coach__team_id__2B0A656D" Association="cyberdbModel.FK__Coach__team_id__2B0A656D">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Coach" EntitySet="Coach" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Team__game_id__1AD3FDA4" Association="cyberdbModel.FK__Team__game_id__1AD3FDA4">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="Team" EntitySet="Team" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tournamen__game___17036CC0" Association="cyberdbModel.FK__Tournamen__game___17036CC0">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="Tournament" EntitySet="Tournament" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Health__player_i__4F47C5E3" Association="cyberdbModel.FK__Health__player_i__4F47C5E3">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="Health" EntitySet="Health" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tournamen__organ__17F790F9" Association="cyberdbModel.FK__Tournamen__organ__17F790F9">
+            <End Role="Organizer" EntitySet="Organizer" />
+            <End Role="Tournament" EntitySet="Tournament" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Player__team_id__2DE6D218" Association="cyberdbModel.FK__Player__team_id__2DE6D218">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Player" EntitySet="Player" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Team_Tour__team___1DB06A4F" Association="cyberdbModel.FK__Team_Tour__team___1DB06A4F">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Team_Tournament" EntitySet="Team_Tournament" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Team_Tour__tourn__1EA48E88" Association="cyberdbModel.FK__Team_Tour__tourn__1EA48E88">
+            <End Role="Tournament" EntitySet="Tournament" />
+            <End Role="Team_Tournament" EntitySet="Team_Tournament" />
+          </AssociationSet>
+          <EntitySet Name="Stats" EntityType="cyberdbModel.Stats" />
+          <AssociationSet Name="FK__Stats__health_id__5224328E" Association="cyberdbModel.FK__Stats__health_id__5224328E">
+            <End Role="Health" EntitySet="Health" />
+            <End Role="Stats" EntitySet="Stats" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Coach">
+          <Key>
+            <PropertyRef Name="coach_id" />
+          </Key>
+          <Property Name="coach_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="coach_lastname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="coach_firstname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="coach_birthdate" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="coach_country" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="coach_login" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="coach_password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="team_id" Type="Int32" />
+          <NavigationProperty Name="Team" Relationship="cyberdbModel.FK__Coach__team_id__2B0A656D" FromRole="Coach" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="game_id" />
+          </Key>
+          <Property Name="game_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="game_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="game_year" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Team" Relationship="cyberdbModel.FK__Team__game_id__1AD3FDA4" FromRole="Game" ToRole="Team" />
+          <NavigationProperty Name="Tournament" Relationship="cyberdbModel.FK__Tournamen__game___17036CC0" FromRole="Game" ToRole="Tournament" />
+        </EntityType>
+        <EntityType Name="Health">
+          <Key>
+            <PropertyRef Name="health_id" />
+          </Key>
+          <Property Name="health_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="health_temperature" Type="Double" />
+          <Property Name="health_pulse" Type="Double" />
+          <Property Name="health_systolicPressure" Type="Int32" />
+          <Property Name="health_diastolicPressure" Type="Int32" />
+          <Property Name="player_id" Type="Int32" />
+          <NavigationProperty Name="Player" Relationship="cyberdbModel.FK__Health__player_i__4F47C5E3" FromRole="Health" ToRole="Player" />
+          <NavigationProperty Name="Stats" Relationship="cyberdbModel.FK__Stats__health_id__5224328E" FromRole="Health" ToRole="Stats" />
+        </EntityType>
+        <EntityType Name="Organizer">
+          <Key>
+            <PropertyRef Name="organizer_id" />
+          </Key>
+          <Property Name="organizer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="organizer_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="organizer_description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="organizer_login" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="organizer_password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tournament" Relationship="cyberdbModel.FK__Tournamen__organ__17F790F9" FromRole="Organizer" ToRole="Tournament" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="player_id" />
+          </Key>
+          <Property Name="player_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="player_lastname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="player_firstname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="player_birthdate" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="player_country" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="player_login" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="player_password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="team_id" Type="Int32" />
+          <NavigationProperty Name="Health" Relationship="cyberdbModel.FK__Health__player_i__4F47C5E3" FromRole="Player" ToRole="Health" />
+          <NavigationProperty Name="Team" Relationship="cyberdbModel.FK__Player__team_id__2DE6D218" FromRole="Player" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="team_id" />
+          </Key>
+          <Property Name="team_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="team_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="team_country" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="game_id" Type="Int32" />
+          <NavigationProperty Name="Coach" Relationship="cyberdbModel.FK__Coach__team_id__2B0A656D" FromRole="Team" ToRole="Coach" />
+          <NavigationProperty Name="Game" Relationship="cyberdbModel.FK__Team__game_id__1AD3FDA4" FromRole="Team" ToRole="Game" />
+          <NavigationProperty Name="Player" Relationship="cyberdbModel.FK__Player__team_id__2DE6D218" FromRole="Team" ToRole="Player" />
+          <NavigationProperty Name="Team_Tournament" Relationship="cyberdbModel.FK__Team_Tour__team___1DB06A4F" FromRole="Team" ToRole="Team_Tournament" />
+        </EntityType>
+        <EntityType Name="Team_Tournament">
+          <Key>
+            <PropertyRef Name="team_tournament_id" />
+          </Key>
+          <Property Name="team_tournament_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="team_id" Type="Int32" />
+          <Property Name="tournament_id" Type="Int32" />
+          <NavigationProperty Name="Team" Relationship="cyberdbModel.FK__Team_Tour__team___1DB06A4F" FromRole="Team_Tournament" ToRole="Team" />
+          <NavigationProperty Name="Tournament" Relationship="cyberdbModel.FK__Team_Tour__tourn__1EA48E88" FromRole="Team_Tournament" ToRole="Tournament" />
+        </EntityType>
+        <EntityType Name="Tournament">
+          <Key>
+            <PropertyRef Name="tournament_id" />
+          </Key>
+          <Property Name="tournament_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tournament_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="tournament_type" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="tournament_startdate" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="tournament_enddate" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="tournament_location" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="game_id" Type="Int32" />
+          <Property Name="organizer_id" Type="Int32" />
+          <NavigationProperty Name="Game" Relationship="cyberdbModel.FK__Tournamen__game___17036CC0" FromRole="Tournament" ToRole="Game" />
+          <NavigationProperty Name="Organizer" Relationship="cyberdbModel.FK__Tournamen__organ__17F790F9" FromRole="Tournament" ToRole="Organizer" />
+          <NavigationProperty Name="Team_Tournament" Relationship="cyberdbModel.FK__Team_Tour__tourn__1EA48E88" FromRole="Tournament" ToRole="Team_Tournament" />
+        </EntityType>
+        <Association Name="FK__Coach__team_id__2B0A656D">
+          <End Type="cyberdbModel.Team" Role="Team" Multiplicity="0..1" />
+          <End Type="cyberdbModel.Coach" Role="Coach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="team_id" />
+            </Principal>
+            <Dependent Role="Coach">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Team__game_id__1AD3FDA4">
+          <End Type="cyberdbModel.Game" Role="Game" Multiplicity="0..1" />
+          <End Type="cyberdbModel.Team" Role="Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="game_id" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tournamen__game___17036CC0">
+          <End Type="cyberdbModel.Game" Role="Game" Multiplicity="0..1" />
+          <End Type="cyberdbModel.Tournament" Role="Tournament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="game_id" />
+            </Principal>
+            <Dependent Role="Tournament">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Health__player_i__4F47C5E3">
+          <End Type="cyberdbModel.Player" Role="Player" Multiplicity="0..1" />
+          <End Type="cyberdbModel.Health" Role="Health" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="Health">
+              <PropertyRef Name="player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tournamen__organ__17F790F9">
+          <End Type="cyberdbModel.Organizer" Role="Organizer" Multiplicity="0..1" />
+          <End Type="cyberdbModel.Tournament" Role="Tournament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizer">
+              <PropertyRef Name="organizer_id" />
+            </Principal>
+            <Dependent Role="Tournament">
+              <PropertyRef Name="organizer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Player__team_id__2DE6D218">
+          <End Type="cyberdbModel.Team" Role="Team" Multiplicity="0..1" />
+          <End Type="cyberdbModel.Player" Role="Player" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="team_id" />
+            </Principal>
+            <Dependent Role="Player">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Team_Tour__team___1DB06A4F">
+          <End Type="cyberdbModel.Team" Role="Team" Multiplicity="0..1" />
+          <End Type="cyberdbModel.Team_Tournament" Role="Team_Tournament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="team_id" />
+            </Principal>
+            <Dependent Role="Team_Tournament">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Team_Tour__tourn__1EA48E88">
+          <End Type="cyberdbModel.Tournament" Role="Tournament" Multiplicity="0..1" />
+          <End Type="cyberdbModel.Team_Tournament" Role="Team_Tournament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tournament">
+              <PropertyRef Name="tournament_id" />
+            </Principal>
+            <Dependent Role="Team_Tournament">
+              <PropertyRef Name="tournament_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Stats">
+          <Key>
+            <PropertyRef Name="stats_id" />
+          </Key>
+          <Property Name="stats_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stats_median" Type="Double" />
+          <Property Name="stats_mode" Type="Int32" />
+          <Property Name="stats_mean" Type="Double" />
+          <Property Name="stats_stdev" Type="Double" />
+          <Property Name="health_id" Type="Int32" />
+          <NavigationProperty Name="Health" Relationship="cyberdbModel.FK__Stats__health_id__5224328E" FromRole="Stats" ToRole="Health" />
+        </EntityType>
+        <Association Name="FK__Stats__health_id__5224328E">
+          <End Type="cyberdbModel.Health" Role="Health" Multiplicity="0..1" />
+          <End Type="cyberdbModel.Stats" Role="Stats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Health">
+              <PropertyRef Name="health_id" />
+            </Principal>
+            <Dependent Role="Stats">
+              <PropertyRef Name="health_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="cyberdbModelStoreContainer" CdmEntityContainer="cyberdbEntities">
+          <EntitySetMapping Name="Coach">
+            <EntityTypeMapping TypeName="cyberdbModel.Coach">
+              <MappingFragment StoreEntitySet="Coach">
+                <ScalarProperty Name="team_id" ColumnName="team_id" />
+                <ScalarProperty Name="coach_password" ColumnName="coach_password" />
+                <ScalarProperty Name="coach_login" ColumnName="coach_login" />
+                <ScalarProperty Name="coach_country" ColumnName="coach_country" />
+                <ScalarProperty Name="coach_birthdate" ColumnName="coach_birthdate" />
+                <ScalarProperty Name="coach_firstname" ColumnName="coach_firstname" />
+                <ScalarProperty Name="coach_lastname" ColumnName="coach_lastname" />
+                <ScalarProperty Name="coach_id" ColumnName="coach_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Game">
+            <EntityTypeMapping TypeName="cyberdbModel.Game">
+              <MappingFragment StoreEntitySet="Game">
+                <ScalarProperty Name="game_year" ColumnName="game_year" />
+                <ScalarProperty Name="game_name" ColumnName="game_name" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Health">
+            <EntityTypeMapping TypeName="cyberdbModel.Health">
+              <MappingFragment StoreEntitySet="Health">
+                <ScalarProperty Name="player_id" ColumnName="player_id" />
+                <ScalarProperty Name="health_diastolicPressure" ColumnName="health_diastolicPressure" />
+                <ScalarProperty Name="health_systolicPressure" ColumnName="health_systolicPressure" />
+                <ScalarProperty Name="health_pulse" ColumnName="health_pulse" />
+                <ScalarProperty Name="health_temperature" ColumnName="health_temperature" />
+                <ScalarProperty Name="health_id" ColumnName="health_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organizer">
+            <EntityTypeMapping TypeName="cyberdbModel.Organizer">
+              <MappingFragment StoreEntitySet="Organizer">
+                <ScalarProperty Name="organizer_password" ColumnName="organizer_password" />
+                <ScalarProperty Name="organizer_login" ColumnName="organizer_login" />
+                <ScalarProperty Name="organizer_description" ColumnName="organizer_description" />
+                <ScalarProperty Name="organizer_name" ColumnName="organizer_name" />
+                <ScalarProperty Name="organizer_id" ColumnName="organizer_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Player">
+            <EntityTypeMapping TypeName="cyberdbModel.Player">
+              <MappingFragment StoreEntitySet="Player">
+                <ScalarProperty Name="team_id" ColumnName="team_id" />
+                <ScalarProperty Name="player_password" ColumnName="player_password" />
+                <ScalarProperty Name="player_login" ColumnName="player_login" />
+                <ScalarProperty Name="player_country" ColumnName="player_country" />
+                <ScalarProperty Name="player_birthdate" ColumnName="player_birthdate" />
+                <ScalarProperty Name="player_firstname" ColumnName="player_firstname" />
+                <ScalarProperty Name="player_lastname" ColumnName="player_lastname" />
+                <ScalarProperty Name="player_id" ColumnName="player_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Team">
+            <EntityTypeMapping TypeName="cyberdbModel.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="team_country" ColumnName="team_country" />
+                <ScalarProperty Name="team_name" ColumnName="team_name" />
+                <ScalarProperty Name="team_id" ColumnName="team_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Team_Tournament">
+            <EntityTypeMapping TypeName="cyberdbModel.Team_Tournament">
+              <MappingFragment StoreEntitySet="Team_Tournament">
+                <ScalarProperty Name="tournament_id" ColumnName="tournament_id" />
+                <ScalarProperty Name="team_id" ColumnName="team_id" />
+                <ScalarProperty Name="team_tournament_id" ColumnName="team_tournament_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tournament">
+            <EntityTypeMapping TypeName="cyberdbModel.Tournament">
+              <MappingFragment StoreEntitySet="Tournament">
+                <ScalarProperty Name="organizer_id" ColumnName="organizer_id" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="tournament_location" ColumnName="tournament_location" />
+                <ScalarProperty Name="tournament_enddate" ColumnName="tournament_enddate" />
+                <ScalarProperty Name="tournament_startdate" ColumnName="tournament_startdate" />
+                <ScalarProperty Name="tournament_type" ColumnName="tournament_type" />
+                <ScalarProperty Name="tournament_name" ColumnName="tournament_name" />
+                <ScalarProperty Name="tournament_id" ColumnName="tournament_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stats">
+            <EntityTypeMapping TypeName="cyberdbModel.Stats">
+              <MappingFragment StoreEntitySet="Stats">
+                <ScalarProperty Name="health_id" ColumnName="health_id" />
+                <ScalarProperty Name="stats_stdev" ColumnName="stats_stdev" />
+                <ScalarProperty Name="stats_mean" ColumnName="stats_mean" />
+                <ScalarProperty Name="stats_mode" ColumnName="stats_mode" />
+                <ScalarProperty Name="stats_median" ColumnName="stats_median" />
+                <ScalarProperty Name="stats_id" ColumnName="stats_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
